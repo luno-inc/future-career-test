@@ -109,7 +109,7 @@ export default function EventSelection() {
   }
 
   return (
-    <div className="min-h-screen bg-white py-16 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-slate-100 py-16 px-4">
       <div className="max-w-5xl mx-auto">
         <Button
           variant="ghost"
@@ -155,8 +155,8 @@ export default function EventSelection() {
             </div>
             <Button
               onClick={shuffleEvents}
-              variant="default"
-              className="bg-indigo-600 hover:bg-indigo-700 gap-2"
+              variant="outline"
+              className="border-slate-200 hover:bg-slate-50 gap-2"
             >
               <Shuffle className="w-4 h-4" />
               再抽選

@@ -19,6 +19,11 @@ const MAJOR_SUGGESTIONS = [
   'トレーナー学', '健康科学', '学際領域', '未定', '特になし'
 ];
 
+const FACULTY_OPTIONS = [
+  '人文科学系（文学・哲学・史学など）', '法学系', '経済・経営・商学系', '社会学系', '教育学系',
+  '理学系', '工学系', '農学系', '医学・歯学・薬学系', '保健・看護系', '芸術系', 'その他'
+];
+
 const QUESTIONS = {
   basic: [
     {
@@ -34,6 +39,16 @@ const QUESTIONS = {
       options: ['社会人', '学生']
     },
     {
+      id: 'grade',
+      label: '現在の立場を教えてください',
+      type: 'select',
+      optionsWhenKey: 'work_or_student',
+      optionsWhen: {
+        社会人: ['企業勤務（正社員）', '企業勤務（非正規）', '自営業・フリーランス', '公務員', '教員・研究者', '求職中', 'その他'],
+        学生: ['大学1年', '大学2年', '大学3年', '大学4年', '修士1年', '修士2年', '博士課程', 'その他']
+      }
+    },
+    {
       id: 'company',
       label: '勤務先の企業名や経歴を教えてください',
       type: 'textarea',
@@ -47,13 +62,19 @@ const QUESTIONS = {
       options: ['高校卒業', '専門学校卒業', '短期大学卒業', '大学卒業', '修士課程修了', '博士課程修了', 'その他']
     },
     {
-      id: 'grade',
-      label: '現在の立場を教えてください',
+      id: 'faculty',
+      label: '学部を教えてください',
       type: 'select',
-      optionsWhenKey: 'work_or_student',
+      placeholder: 'まず「最終学歴」を選択してください',
+      optionsWhenKey: 'education',
       optionsWhen: {
-        社会人: ['企業勤務（正社員）', '企業勤務（非正規）', '自営業・フリーランス', '公務員', '教員・研究者', '求職中', 'その他'],
-        学生: ['大学1年', '大学2年', '大学3年', '大学4年', '修士1年', '修士2年', '博士課程', 'その他']
+        '高校卒業': ['該当なし'],
+        '専門学校卒業': ['該当なし'],
+        '短期大学卒業': FACULTY_OPTIONS,
+        '大学卒業': FACULTY_OPTIONS,
+        '修士課程修了': FACULTY_OPTIONS,
+        '博士課程修了': FACULTY_OPTIONS,
+        'その他': ['該当なし']
       }
     },
     {
@@ -131,6 +152,7 @@ export default function QuestionSection({ sectionId, profile, setProfile }) {
     setProfile(prev => {
       const next = { ...prev, [questionId]: value };
       if (questionId === 'work_or_student') next.grade = '';
+      if (questionId === 'education') next.faculty = '';
       return next;
     });
   };
@@ -182,7 +204,7 @@ export default function QuestionSection({ sectionId, profile, setProfile }) {
                   disabled={options.length === 0}
                 >
                   <SelectTrigger className="border-indigo-100 focus:border-indigo-300">
-                    <SelectValue placeholder={options.length === 0 ? 'まず「社会人か学生か」を選択してください' : '選択してください'} />
+                    <SelectValue placeholder={options.length === 0 ? (question.placeholder || 'まず「社会人か学生か」を選択してください') : '選択してください'} />
                   </SelectTrigger>
                   <SelectContent>
                     {options.map((option) => (

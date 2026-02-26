@@ -600,7 +600,7 @@ export default function PresentationMaterial() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900 py-8 px-4">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         {/* ヘッダー */}
         <div className="flex items-center justify-between mb-6">
           <Button

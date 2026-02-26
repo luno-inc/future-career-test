@@ -24,6 +24,7 @@ const SAMPLE_DATA = {
     education: '大学卒業',
     company: '',
     grade: '大学3年',
+    faculty: '経済・経営・商学系',
     major: '経済学・経営学',
     industry: ['IT・ソフトウェア', 'コンサルティング', '金融・保険'],
     core_values: '挑戦、成長、自由。新しいことに挑戦し続けることで成長し、自分らしく生きたい。',
@@ -51,6 +52,7 @@ const SAMPLE_DATA = {
     company: '〇〇大学 社会学部 教授（博士課程修了後、同大学で教員として勤務）',
     education: '博士課程修了',
     grade: '教員・研究者',
+    faculty: '社会学系',
     major: '社会学・社会福祉学',
     industry: ['教育・研究', '公務員・非営利', 'コンサルティング'],
     core_values: '探究心、教育、社会貢献。学問を通じて次世代を育て、社会の課題解決に貢献したい。',
@@ -227,7 +229,7 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-slate-100 py-12 px-4">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <Button

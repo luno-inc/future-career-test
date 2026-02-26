@@ -7,11 +7,14 @@ import { Compass, Sparkles, ChevronRight, Shield } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-slate-100">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-10" />
-        <div className="relative max-w-6xl mx-auto px-6 py-20">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-slate-100 flex flex-col">
+      {/* Hero Section - 高さfill・コンテンツ中央 */}
+      <div className="relative flex-1 flex flex-col justify-center overflow-hidden min-h-0">
+        <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-10 pointer-events-none" />
+        <div 
+          className="relative max-w-5xl mx-auto px-6 w-full"
+          style={{ paddingTop: 'clamp(1.5rem, 6vh, 3rem)', paddingBottom: 'clamp(1.5rem, 6vh, 3rem)' }}
+        >
           <div className="flex items-center justify-center mb-8">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full blur-xl opacity-30 animate-pulse" />

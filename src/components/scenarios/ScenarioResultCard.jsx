@@ -38,7 +38,7 @@ export default function ScenarioResultCard({ scenario, index }) {
       </CardHeader>
 
       <CardContent className="px-12 pb-16">
-        <div className="max-w-3xl space-y-16">
+        <div className="w-full space-y-16">
           {/* 役割 */}
           {scenario.role_definition && (
             <section>

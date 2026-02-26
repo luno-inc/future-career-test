@@ -21,6 +21,8 @@ export default function Scenarios() {
   const [scenarios, setScenarios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showConfirmNavigate, setShowConfirmNavigate] = useState(false);
+  const [showConfirmBackToEvent, setShowConfirmBackToEvent] = useState(false);
+  const [showConfirmStartOver, setShowConfirmStartOver] = useState(false);
 
   useEffect(() => {
     // セッションストレージからシナリオを読み込み
@@ -50,6 +52,16 @@ export default function Scenarios() {
     router.push('/event-selection');
   };
 
+  const handleConfirmBackToEventSelection = () => {
+    setShowConfirmBackToEvent(false);
+    router.push('/event-selection');
+  };
+
+  const handleConfirmStartOver = () => {
+    setShowConfirmStartOver(false);
+    handleStartOver();
+  };
+
 
 
   if (loading) {
@@ -62,12 +74,12 @@ export default function Scenarios() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-slate-100 py-12 px-4">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
             <Button
               variant="ghost"
-              onClick={() => router.push('/event-selection')}
+              onClick={() => setShowConfirmBackToEvent(true)}
               className="mb-4"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
@@ -90,7 +102,7 @@ export default function Scenarios() {
               別のシナリオを生成
             </Button>
             <Button
-              onClick={handleStartOver}
+              onClick={() => setShowConfirmStartOver(true)}
               variant="outline"
               className="border-slate-200 hover:bg-slate-50"
             >
@@ -141,6 +153,46 @@ export default function Scenarios() {
                 className="bg-indigo-600 hover:bg-indigo-700"
               >
                 はい、遷移する
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
+        <AlertDialog open={showConfirmBackToEvent} onOpenChange={setShowConfirmBackToEvent}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>イベント選択に戻りますか？</AlertDialogTitle>
+              <AlertDialogDescription>
+                遷移すると、現在のシナリオのデータは削除されます。必要に応じてスクリーンショットを保存してからお進みください。
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>キャンセル</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={handleConfirmBackToEventSelection}
+                className="bg-indigo-600 hover:bg-indigo-700"
+              >
+                はい、戻る
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
+        <AlertDialog open={showConfirmStartOver} onOpenChange={setShowConfirmStartOver}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>最初からやり直しますか？</AlertDialogTitle>
+              <AlertDialogDescription>
+                プロフィールとシナリオのデータはすべて削除され、トップページに戻ります。よろしいですか？
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>キャンセル</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={handleConfirmStartOver}
+                className="bg-indigo-600 hover:bg-indigo-700"
+              >
+                はい、やり直す
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
